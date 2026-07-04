@@ -1,0 +1,9 @@
+name: bunny-proxy
+services:
+  proxy:
+    container_name: bunny-proxy
+    ports:
+      - "8080:8080"
+    build:
+      context: .
+    restart: "unless-stopped"
