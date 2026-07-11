@@ -71,6 +71,10 @@ func getLatestBunny() (*Bunny, error) {
 	for _, post := range feed.Posts {
 		isBunny, bunnyNumber := isBunnyPost(post.Post)
 
+		if !isBunny {
+			continue
+		}
+
 		imageResp, err := http.Get(post.Post.Embed.Images[0].Fullsize)
 		if err != nil {
 			return nil, err
@@ -81,13 +85,11 @@ func getLatestBunny() (*Bunny, error) {
 			return nil, err
 		}
 
-		if isBunny {
-			return &Bunny{
-				Number:      bunnyNumber,
-				Description: post.Post.Record.Text,
-				Image:       image,
-			}, nil
-		}
+		return &Bunny{
+			Number:      bunnyNumber,
+			Description: post.Post.Record.Text,
+			Image:       image,
+		}, nil
 	}
 
 	fmt.Println(len(feed.Posts))
