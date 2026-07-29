@@ -1,7 +1,7 @@
 # Build
 FROM golang:1.26-alpine AS build
 WORKDIR /app
-COPY go.mod main.go ./
+COPY go.mod go.sum main.go ./
 RUN go build
 
 # Run
