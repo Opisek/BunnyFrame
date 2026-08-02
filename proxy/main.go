@@ -110,7 +110,8 @@ func getLatestBunny() (*Bunny, error) {
 
 func scaleImage(img image.Image, width int, height int) image.Image {
 	scaledImg := imaging.Fit(img, width, height, imaging.CatmullRom)
-	background := imaging.New(width, height, color.White)
+	blurred := imaging.Blur(img, 8)
+	background := imaging.Fill(blurred, width, height, imaging.Center, imaging.CatmullRom)
 	x := (width - scaledImg.Bounds().Dx()) / 2
 	y := (height - scaledImg.Bounds().Dy()) / 2
 	return imaging.Paste(background, scaledImg, image.Pt(x, y))
