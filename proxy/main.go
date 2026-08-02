@@ -181,7 +181,7 @@ func main() {
 				return
 			}
 
-			img = scaleImage(latestBunny.Image, 800, 400)
+			img = scaleImage(latestBunny.Image, width, height)
 		}
 
 		// Dither the bunny
